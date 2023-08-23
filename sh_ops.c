@@ -22,7 +22,7 @@ int cmd_loop(inf_t *inf, char **av)
 			set_inf(inf, av);
 			bin_ret = f_bin(inf);
 			if (bin_ret == -1)
-				find_cmd(inf);
+				f_cmd(inf);
 		}
 		else if (interactive_md(inf))
 			put_char('\n');
@@ -59,7 +59,7 @@ int f_bin(inf_t *inf)
 		{"history", _history},
 		{"setenv", set_env},
 		{"unsetenv", unset_env},
-		{"cd", _mycdir},
+		{"cd", _cdir},
 		{"alias", _alias},
 		{NULL, NULL}
 	};
@@ -100,7 +100,7 @@ void f_cmd(inf_t *inf)
 	if (path)
 	{
 		inf->path = path;
-		fork_cmd(info);
+		fork_cmd(inf);
 	}
 	else
 	{

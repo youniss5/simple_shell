@@ -103,13 +103,13 @@ typedef struct builtin
 	int (*func)(inf_t *);
 } builtin_table;
 
+int is_cmd(inf_t *, char *);
 
 int cmd_loop(inf_t *, char **);
 int f_bin(inf_t *);
-void find_cmd(inf_t *);
+void f_cmd(inf_t *);
 void fork_cmd(inf_t *);
 
-int is_cmd(inf_t *, char *);
 char *dup_char(char *, int, int);
 char *f_path(inf_t *, char *, char *);
 
@@ -154,20 +154,20 @@ int _atoi(char *);
 int delim_chk(char, char *);
 
 int err_atoi(char *);
-void p_err(info_t *, char *);
+void p_err(inf_t *, char *);
 int print_d(int, int);
-char *transfer_number(long int, int, int);
+char *transfer_numb(long int, int, int);
 void delete_comm(char *);
 
 int _exitshell(inf_t *);
-int _mycdir(inf_t *);
+int _cdir(inf_t *);
 int _pdir(inf_t *);
 
 int _history(inf_t *);
 int _alias(inf_t *);
 
 /* buffers.c */
-ssize_t buff_input(inf _t *, char **, size_t *);
+ssize_t buff_input(inf_t *, char **, size_t *);
 ssize_t get_length(inf_t *);
 ssize_t buff_read(inf_t *, char *, size_t *);
 int get_line(inf_t *, char **, size_t *);

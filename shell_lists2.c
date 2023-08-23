@@ -7,16 +7,16 @@
  */
 ssize_t get_node_index(list_t *head, list_t *node)
 {
-	size_t i = 0;
+	size_t x = 0;
 
 	while (head)
 	{
 		if (head == node)
 		{
-			return (i);
+			return (x);
 		}
 		head = head->next;
-		i++;
+		x++;
 	}
 	return (-1);
 }
@@ -27,7 +27,7 @@ ssize_t get_node_index(list_t *head, list_t *node)
  */
 size_t print_list(const list_t *h)
 {
-	size_t i = 0;
+	size_t x = 0;
 
 	while (h)
 	{
@@ -37,9 +37,9 @@ size_t print_list(const list_t *h)
 		put_s(h->str ? h->str : "(nil)");
 		put_s("\n");
 		h = h->next;
-		i++;
+		x++;
 	}
-	return (i);
+	return (x);
 }
 
 /**
@@ -67,16 +67,16 @@ list_t *node_starts_with(list_t *node, char *prefix, char c)
  * @h: pointer to the first node.
  * Return: size of the list.
  */
-size_t list_len(const list_t *h)
+size_t list_len(const list_t *head)
 {
-	size_t i = 0;
+	size_t x = 0;
 
-	while (h)
+	while (head)
 	{
-		h = h->next;
-		i++;
+		head = head->next;
+		x++;
 	}
-	return (i);
+	return (x);
 }
 
 /**
