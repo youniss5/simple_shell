@@ -11,24 +11,6 @@ int interactive_md(inf_t *inf)
 }
 
 /**
- * delim_chk - checks if the character matches the delimeter.
- * @c: the char to check.
- * @delim: the delimeter.
- * Return: if true returns 1, if false returns 0.
- */
-int delim_chk(char c, char *delim)
-{
-	while (*delim)
-	{
-		if (*delim++ == c)
-		{
-			return (1);
-		}
-	}
-	return (0);
-}
-
-/**
  *_isalpha - search for alphabetic characters.
  *@c: The character to be inputted.
  *Return: 1 if c is an alphabet , 0 otherwise.
@@ -82,6 +64,23 @@ int _atoi(char *s)
 	}
 	else
 		oput = result;
-
 	return (oput);
+}
+
+/**
+ * delim_chk - checks if the character matches the delimeter.
+ * @c: the char to check.
+ * @delim: the delimeter.
+ * Return: if true returns 1, if false returns 0.
+ */
+int delim_chk(char c, char *delim)
+{
+	while (*delim)
+	{
+		if (*delim++ == c)
+		{
+			return (1);
+		}
+	}
+	return (0);
 }

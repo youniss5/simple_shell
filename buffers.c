@@ -15,12 +15,12 @@ ssize_t buff_input(inf_t *inf, char **buff, size_t *len)
 	if (!*len)
 	{
 		free(*buff);
-		*buf = NULL;
+		*buff = NULL;
 		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
 		r = getline(buff, &len_p, stdin);
 #else
-		r = _getline(inf, buff, &len_p);
+		r = get_line(inf, buff, &len_p);
 #endif
 		if (r > 0)
 		{
@@ -53,7 +53,7 @@ ssize_t get_length(inf_t *inf)
 	ssize_t r = 0;
 	char **buff_p = &(inf->arg), *p;
 
-	_putchar(BUF_FLUSH);
+	put_char(BUF_FLUSH);
 	r = buff_input(inf, &buff, &len);
 	if (r == -1)
 	{
@@ -64,10 +64,10 @@ ssize_t get_length(inf_t *inf)
 		x = i;
 		p = buff + i;
 
-		check_chain(inf, buff, &x, i, len);
+		chain_rev(inf, buff, &x, i, len);
 		while (x < len)
 		{
-			if (is_chain(inf, buff, &x))
+			if (chain_delim(inf, buff, &x))
 				break;
 			x++;
 		}
@@ -163,7 +163,7 @@ int get_line(inf_t *inf, char **ptr, size_t *length)
  */
 void sigint_Handler(__attribute__((unused))int signal_num)
 {
-	_puts("\n");
-	_puts("$ ");
-	_putchar(BUF_FLUSH);
+	put_s("\n");
+	put_s("$ ");
+	put_char(BUF_FLUSH);
 }

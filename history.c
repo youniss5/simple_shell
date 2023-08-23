@@ -1,8 +1,8 @@
 #include "shell.h"
 /**
- * get_h_file - function that gets the history file
- * @inf: the parameter struct
- * Return: str with history file inside
+ * get_h_file - function that gets the history file.
+ * @inf: the parameter struct.
+ * Return: str with history file inside.
  */
 
 char *get_h_file(inf_t *inf)
@@ -23,9 +23,9 @@ char *get_h_file(inf_t *inf)
 }
 
 /**
- * write_h - creates a file, or appends to an existing one
- * @inf: the parameter struct
- * Return: 1 (success), else -1
+ * write_h - creates a file, or appends to an existing one.
+ * @inf: the struct parameter.
+ * Return: 1 (success), else -1 (failure).
  */
 int write_h(inf_t *inf)
 {
@@ -39,7 +39,9 @@ int write_h(inf_t *inf)
 	fd = open(filename, O_CREAT | O_TRUNC | O_RDWR, 0644);
 	free(filename);
 	if (fd == -1)
+	{
 		return (-1);
+	}
 	for (node = inf->history; node; node = node->next)
 	{
 		put_sfd(node->str, fd);
@@ -51,9 +53,9 @@ int write_h(inf_t *inf)
 }
 
 /**
- * read_h - reads history from a file
- * @inf: the parameter struct
- * Return: histcount on success, 0 for else
+ * read_h - reads history from a file.
+ * @inf: the struct parameter.
+ * Return: histcount on success, 0 elsewise.
  */
 int read_h(inf_t *inf)
 {
@@ -99,11 +101,11 @@ int read_h(inf_t *inf)
 }
 
 /**
- * build_h_list - functions that adds entry to a history linked list
- * @inf: Structure containing arguments
- * @buff: buffer
- * @linecount: the history linecount and histcount
- * Return: 0 (success)
+ * build_h_list - functions that adds entry to a history linked list.
+ * @inf: Structure includes args.
+ * @buff: buffer.
+ * @linecount: the history linecount and histcount.
+ * Return: 0 (success).
  */
 int build_h_list(inf_t *inf, char *buff, int linecount)
 {
@@ -114,14 +116,16 @@ int build_h_list(inf_t *inf, char *buff, int linecount)
 	add_node_end(&node, buff, linecount);
 
 	if (!inf->history)
+	{
 		inf->history = node;
+	}
 	return (0);
 }
 
 /**
- * renumber_h - renumbers the history linked list
- * @inf: Structure containing arguments
- * Return:the new histcount
+ * renumber_h - renumbers the linked list history.
+ * @inf: Structure includes args.
+ * Return:the new histcount.
  */
 int renumber_h(inf_t *inf)
 {

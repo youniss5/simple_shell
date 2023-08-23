@@ -24,10 +24,9 @@ void set_inf(inf_t *inf, char **av)
 	inf->fname = av[0];
 	if (inf->arg)
 	{
-		inf->argv = strtow(inf->arg, " \t");
+		inf->argv = splitter(inf->arg, " \t");
 		if (!inf->argv)
 		{
-
 			inf->argv = malloc(sizeof(char *) * 2);
 			if (inf->argv)
 			{
@@ -38,9 +37,8 @@ void set_inf(inf_t *inf, char **av)
 		for (x = 0; inf->argv && inf->argv[x]; x++)
 			;
 		inf->argc = x;
-
-		replace_alias(inf);
-		replace_vars(inf);
+		alias_exchange(inf);
+		vars_exchange(inf);
 	}
 }
 
@@ -70,6 +68,6 @@ void _ffree_inf(inf_t *inf, int x)
 		bfree((void **)inf->cmd_buf);
 		if (inf->read_fd > 2)
 			close(inf->read_fd);
-		_putchar(BUF_FLUSH);
+		put_char(BUF_FLUSH);
 	}
 }

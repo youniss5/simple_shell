@@ -11,7 +11,9 @@ char *_strcpy(char *dst, char *src)
 	int x = 0;
 
 	if (dst == src || src == 0)
+	{
 		return (dst);
+	}
 	while (src[x])
 	{
 		dst[x] = src[x];
@@ -31,7 +33,9 @@ void put_s(char *str)
 	int x = 0;
 
 	if (!str)
+	{
 		return;
+	}
 	while (str[x] != '\0')
 	{
 		put_char(str[x]);

@@ -1,9 +1,9 @@
 #include "shell.h"
 
 /**
- * befree - NULL the adress and free the pointer
- * @ptr: address of the pointer to free
- * Return: 1 (freed), 0 (else)
+ * mem_free - frees the pointer.
+ * @ptr: the pointer to be freed.
+ * Return: 1 (freed), 0 (failure).
  */
 int mem_free(void **ptr)
 {

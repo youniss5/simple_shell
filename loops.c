@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * msh - the main shell loop
- * @inf: the parameter & return info struct
- * @av: the argument vector from main()
- * Return: 0 on success, 1 on error, or error code
+ * msh - the main shell loop.
+ * @inf: the struct parameter.
+ * @av: main func arg vector.
+ * Return: 0 on success, 1 on error, or error code.
  */
 int msh(inf_t *inf, char **av)
 {
@@ -13,26 +13,26 @@ int msh(inf_t *inf, char **av)
 
 	while (r != -1 && builtin_ret != -2)
 	{
-		clear_info(inf);
-		if (interactive(inf))
-			_puts("$ ");
-		_eputchar(BUF_FLUSH);
-		r = get_input(inf);
+		clear_inf(inf);
+		if (interactive_md(inf))
+			put_s("$ ");
+		e_putchar(BUF_FLUSH);
+		r = get_length(inf);
 		if (r != -1)
 		{
-			set_info(inf, av);
-			builtin_ret = find_builtin(info);
+			set_inf(inf, av);
+			builtin_ret = find_built_in(inf);
 			if (builtin_ret == -1)
-				find_cmd(info);
+				find_cmd(inf);
 		}
-		else if (interactive(info))
-			_putchar('\n');
-		free_info(inf, 0);
+		else if (interactive_md(inf))
+			put_char('\n');
+		_ffree_inf(inf, 0);
 	}
 	write_h(inf);
-	free_info(inf, 1);
-	if (!interactive(inf) && inf->status)
-		exit(info->status);
+	_ffree_inf(inf, 1);
+	if (!interactive_md(inf) && inf->status)
+		exit(inf->status);
 	if (builtin_ret == -2)
 	{
 		if (inf->err_num == -1)
@@ -43,8 +43,8 @@ int msh(inf_t *inf, char **av)
 }
 
 /**
- * find_built_in - finds a builtin command
- * @inf: parameter
+ * find_built_in - finds a builtin cmd.
+ * @inf: struct parameter.
  * Return: -1 if builtin not found,
  * -2 if builtin signals exit()
  * 0 if builtin executed successfully,
@@ -76,9 +76,9 @@ int find_built_in(inf_t *inf)
 }
 
 /**
- * f_cmd - finds a command in path
- * @inf: parameter
- * Return: void
+ * f_cmd - finds a command path.
+ * @inf: struct parameter.
+ * Return: void.
  */
 void f_cmd(inf_t *inf)
 {
@@ -92,7 +92,7 @@ void f_cmd(inf_t *inf)
 		inf->linecount_flag = 0;
 	}
 	for (i = 0, k = 0; inf->arg[i]; i++)
-		if (!is_delim(inf->arg[i], " \t\n"))
+		if (!delim_chk(inf->arg[i], " \t\n"))
 			k++;
 	if (!k)
 		return;
@@ -105,7 +105,7 @@ void f_cmd(inf_t *inf)
 	}
 	else
 	{
-		if ((interactive(inf) || get_env(inf, "PATH=")
+		if ((interactive_md(inf) || get_env(inf, "PATH=")
 			|| inf->argv[0][0] == '/') && is_cmd(inf, inf->argv[0]))
 			fork_cmd(inf);
 		else if (*(inf->arg) != '\n')
@@ -117,9 +117,9 @@ void f_cmd(inf_t *inf)
 }
 
 /**
- * fork_cmd - fork an executed thread to run cmd
- * @inf: the parameter
- * Return: void
+ * fork_cmd - fork an executed thread to run cmd.
+ * @inf: the struct parameter.
+ * Return: void.
  */
 void fork_cmd(inf_t *inf)
 {
@@ -133,11 +133,13 @@ void fork_cmd(inf_t *inf)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(inf->path, inf->argv, get_environ(inf)) == -1)
+		if (execve(inf->path, inf->argv, get_envir(inf)) == -1)
 		{
-			free_info(inf, 1);
+			_ffree_inf(inf, 1);
 			if (errno == EACCES)
+			{
 				exit(126);
+			}
 			exit(1);
 		}
 	}

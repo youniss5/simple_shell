@@ -3,7 +3,7 @@
 /**
  * _history - displays the list of history
  * @inf: Structure containing shell arguments.
- *  Return: 0 (success)
+ *  Return: 0 (success).
  */
 int _history(inf_t *inf)
 {
@@ -13,9 +13,9 @@ int _history(inf_t *inf)
 
 /**
  * unset_alias - sets alias to string
- * @inf: parameter struct
- * @str: string alias
- * Return:  0 (success), 1 (error)
+ * @inf: struct parameter.
+ * @str: string alias.
+ * Return:  0 (success), 1 (error).
  */
 int unset_alias(inf_t *inf, char *str)
 {
@@ -34,10 +34,10 @@ int unset_alias(inf_t *inf, char *str)
 }
 
 /**
- * set_alias - sets alias to string
- * @inf: parameter struct
- * @str: the string alias
- * Return: 0 (success), 1 (error)
+ * set_alias - sets alias to string.
+ * @inf: struct parameter.
+ * @str: the string alias.
+ * Return: 0 (success), 1 (error).
  */
 int set_alias(inf_t *inf, char *str)
 {
@@ -54,31 +54,31 @@ int set_alias(inf_t *inf, char *str)
 }
 
 /**
- * print_alias - prints an alias string
- * @node: the alias node
- * Return: 0  (success), 1 (error)
+ * print_alias - prints an alias string.
+ * @node: the alias node.
+ * Return: 0 (success), 1 (error).
  */
 int print_alias(list_t *node)
 {
-	char *p = NULL, *a = NULL;
+	char *p = NULL, *pt = NULL;
 
 	if (node)
 	{
 		p = _strchr(node->str, '=');
-		for (a = node->str; a <= p; a++)
-			_putchar(*a);
-		_putchar('\'');
-		_puts(p + 1);
-		_puts("'\n");
+		for (pt = node->str; pt <= p; pt++)
+			put_char(*pt);
+		put_char('\'');
+		put_s(p + 1);
+		put_s("'\n");
 		return (0);
 	}
 	return (1);
 }
 
 /**
- * _alias - mimics the alias builtin
- * @inf: Structure containing arguments.
- *  Return: 0 (success)
+ * _alias - mimics the alias.
+ * @inf: Structure includes arguments.
+ *  Return: 0 (success).
  */
 int _alias(inf_t *inf)
 {

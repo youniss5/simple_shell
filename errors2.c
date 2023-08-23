@@ -1,9 +1,9 @@
 #include "shell.h"
 /**
- * err_atoi - converts a str to an int
- * @s: str to be converted
- * Return: 0 if no numbers to convert  in str, converted number or
- *       -1 (error)
+ * err_atoi - converts a str to an int.
+ * @s: str to be converted.
+ * Return: 0 if no numbers to convert in str, converted number or
+ *       -1 (error).
  */
 int err_atoi(char *s)
 {
@@ -28,11 +28,11 @@ int err_atoi(char *s)
 }
 
 /**
- * print_err - prints an error message
- * @inf: the parameter and return inf struct
- * @estr: str containing specified error type
+ * print_err - prints an error message.
+ * @inf: the parameter and return inf struct.
+ * @estr: str containing error type.
  * Return: 0 if no numbers in str, converted number or
- *        -1 (error)
+ *        -1 (error).
  */
 void print_err(inf_t *inf, char *estr)
 {
@@ -46,14 +46,14 @@ void print_err(inf_t *inf, char *estr)
 }
 
 /**
- * print_d -  prints (int) number base 10 (decimal)
- * @input: the input
- * @fd: the filedescriptor to write to
- * Return: numb of chars printed
+ * print_d -  prints int number to base 10.
+ * @input: input.
+ * @fd: the file descriptor to write to.
+ * Return: no. of chars printed.
  */
 int print_d(int input, int fd)
 {
-	int (*__putchar)(char) = _putchar;
+	int (*__putchar)(char) = put_char;
 	int i, count = 0;
 	unsigned int _abs_, current;
 
@@ -79,16 +79,15 @@ int print_d(int input, int fd)
 	}
 	__putchar('0' + current);
 	count++;
-
 	return (count);
 }
 
 /**
- * convert_numb - function that converts (a clone of itoa)
- * @num: number
- * @base: base
- * @flags: argument flags
- * Return: str
+ * convert_numb - function that converts (a clone of atoi).
+ * @num: number.
+ * @base: base.
+ * @flags: argument flags.
+ * Return: str.
  */
 char *convert_numb(long int num, int base, int flags)
 {
@@ -114,14 +113,16 @@ char *convert_numb(long int num, int base, int flags)
 	} while (n != 0);
 
 	if (sign)
+	{
 		*--ptr = sign;
+	}
 	return (ptr);
 }
 
 /**
- * remove_comm -  replaces first instance of '#' with '\0'
- * @buff: address of the str to modify
- * Return: 0 (success )
+ * remove_comm -  replaces first instance of '#' with '\0'.
+ * @buff: address of the str to modify.
+ * Return: 0 (success).
  */
 void remove_comm(char *buff)
 {

@@ -1,13 +1,13 @@
 #include "shell.h"
 /**
- * main - entry point
- * @ac: arg count
- * @av: arg vector
- * Return: 0 (success)or 1 (error)
+ * main - entry point.
+ * @ac: arg count.
+ * @av: arg vector.
+ * Return: 0 (success)or 1 (error).
  */
 int main(int ac, char **av)
 {
-	inf_t inf[] = { INFO_INIT };
+	inf_t inf[] = { inf_init };
 	int fd = 2;
 
 	asm ("mov %1, %0\n\t"
@@ -21,7 +21,9 @@ int main(int ac, char **av)
 		if (fd == -1)
 		{
 			if (errno == EACCES)
+			{
 				exit(126);
+			}
 			if (errno == ENOENT)
 			{
 				e_puts(av[0]);
@@ -33,10 +35,10 @@ int main(int ac, char **av)
 			}
 			return (EXIT_FAILURE);
 		}
-		inf->readfd = fd;
+		inf->read_fd = fd;
 	}
-	populate_env_list(inf);
+	env_list(inf);
 	read_h(inf);
-	hsh(inf, av);
+	msh(inf, av);
 	return (EXIT_SUCCESS);
 }
