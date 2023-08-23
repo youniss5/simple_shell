@@ -31,7 +31,7 @@ ssize_t buff_input(inf_t *inf, char **buff, size_t *len)
 			}
 			inf->linecount_flag = 1;
 			remove_comments(*buff);
-			build_history_list(inf, *buff, inf->histcount++);
+			build_h_list(inf, *buff, inf->histcount++);
 			{
 				*len = r;
 				inf->cmd_buf = buff;
@@ -55,7 +55,7 @@ ssize_t get_length(inf_t *inf)
 
 	_putchar(BUF_FLUSH);
 	r = buff_input(inf, &buff, &len);
-	if (r == -1) /* eof */
+	if (r == -1)
 	{
 		return (-1);
 	}
