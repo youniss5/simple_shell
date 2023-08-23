@@ -15,7 +15,7 @@ char **splitter(char *str, char *delim)
 	if (!delim)
 		delim = " ";
 	for (i = 0; str[i] != '\0'; i++)
-		if (!is_delim(str[i], delim) && (is_delim(str[i + 1], delim)
+		if (!delim_chk(str[i], delim) && (delim_chk(str[i + 1], delim)
 				|| !str[i + 1]))
 			ntoken++;
 
@@ -26,10 +26,10 @@ char **splitter(char *str, char *delim)
 		return (NULL);
 	for (i = 0, x = 0; x < ntoken; x++)
 	{
-		while (is_delim(str[i], delim))
+		while (delim_chk(str[i], delim))
 			i++;
 		k = 0;
-		while (!is_delim(str[i + k], delim) && str[i + k])
+		while (!delim_chk(str[i + k], delim) && str[i + k])
 			k++;
 		s[x] = malloc((k + 1) * sizeof(char));
 		if (!s[x])
