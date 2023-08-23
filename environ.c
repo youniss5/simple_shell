@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * my_env - prints the current environment.
  * @inf: Structure containing the arguments.

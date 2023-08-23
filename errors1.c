@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  *e_puts - prints an input string.
  * @str: string to be printed.

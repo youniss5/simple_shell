@@ -28,21 +28,21 @@ int err_atoi(char *s)
 }
 
 /**
- * print_err - prints an error message.
+ * p_err - prints an error message.
  * @inf: the parameter and return inf struct.
  * @estr: str containing error type.
  * Return: 0 if no numbers in str, converted number or
  *        -1 (error).
  */
-void print_err(inf_t *inf, char *estr)
+void p_err(inf_t *inf, char *estr)
 {
-	_eputs(inf->fname);
-	_eputs(": ");
+	e_puts(inf->fname);
+	e_puts(": ");
 	print_d(inf->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(inf->argv[0]);
-	_eputs(": ");
-	_eputs(estr);
+	e_puts(": ");
+	e_puts(inf->argv[0]);
+	e_puts(": ");
+	e_puts(estr);
 }
 
 /**
@@ -58,7 +58,7 @@ int print_d(int input, int fd)
 	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
-		__putchar = _eputchar;
+		__putchar = e_putchar;
 	if (input < 0)
 	{
 		_abs_ = -input;
@@ -83,13 +83,13 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_numb - function that converts (a clone of atoi).
+ * transfer_numb - function that converts (a clone of atoi).
  * @num: number.
  * @base: base.
  * @flags: argument flags.
  * Return: str.
  */
-char *convert_numb(long int num, int base, int flags)
+char *transfer_numb(long int num, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
@@ -120,11 +120,11 @@ char *convert_numb(long int num, int base, int flags)
 }
 
 /**
- * remove_comm -  replaces first instance of '#' with '\0'.
+ * delete_comm -  replaces first instance of '#' with '\0'.
  * @buff: address of the str to modify.
  * Return: 0 (success).
  */
-void remove_comm(char *buff)
+void delete_comm(char *buff)
 {
 	int i;
 

@@ -1,12 +1,10 @@
 #include "shell.h"
-
 /**
  * splitter - splits a string into tokens.
  * @str: the string to be splitted.
  * @delim: the delimiter.
  * Return: a pointer to an array of strings.
  */
-
 char **splitter(char *str, char *delim)
 {
 	int i, x, k, m, ntoken = 0;

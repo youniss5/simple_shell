@@ -1,17 +1,16 @@
 #include "shell.h"
-
 /**
- * msh - the main shell loop.
+ * cmd_loop - the main shell loop.
  * @inf: the struct parameter.
  * @av: main func arg vector.
  * Return: 0 on success, 1 on error, or error code.
  */
-int msh(inf_t *inf, char **av)
+int cmd_loop(inf_t *inf, char **av)
 {
 	ssize_t r = 0;
-	int builtin_ret = 0;
+	int bin_ret = 0;
 
-	while (r != -1 && builtin_ret != -2)
+	while (r != -1 && bin_ret != -2)
 	{
 		clear_inf(inf);
 		if (interactive_md(inf))
@@ -21,8 +20,8 @@ int msh(inf_t *inf, char **av)
 		if (r != -1)
 		{
 			set_inf(inf, av);
-			builtin_ret = find_built_in(inf);
-			if (builtin_ret == -1)
+			bin_ret = f_bin(inf);
+			if (bin_ret == -1)
 				find_cmd(inf);
 		}
 		else if (interactive_md(inf))
@@ -33,30 +32,30 @@ int msh(inf_t *inf, char **av)
 	_ffree_inf(inf, 1);
 	if (!interactive_md(inf) && inf->status)
 		exit(inf->status);
-	if (builtin_ret == -2)
+	if (bin_ret == -2)
 	{
 		if (inf->err_num == -1)
 			exit(inf->status);
 		exit(inf->err_num);
 	}
-	return (builtin_ret);
+	return (bin_ret);
 }
 
 /**
- * find_built_in - finds a builtin cmd.
+ * f_bin - finds a builtin cmd.
  * @inf: struct parameter.
  * Return: -1 if builtin not found,
  * -2 if builtin signals exit()
  * 0 if builtin executed successfully,
  * 1 if builtin found but not successful,
  */
-int find_built_in(inf_t *inf)
+int f_bin(inf_t *inf)
 {
-	int i, built_in_ret = -1;
+	int i, binn_ret = -1;
 	builtin_table builtintbl[] = {
 		{"exit", _exitshell},
 		{"env", my_env},
-		{"help", _myhelp},
+		{"help", _pdir},
 		{"history", _history},
 		{"setenv", set_env},
 		{"unsetenv", unset_env},
@@ -69,10 +68,10 @@ int find_built_in(inf_t *inf)
 		if (_strcmp(inf->argv[0], builtintbl[i].type) == 0)
 		{
 			inf->line_count++;
-			built_in_ret = builtintbl[i].func(inf);
+			binn_ret = builtintbl[i].func(inf);
 			break;
 		}
-	return (built_in_ret);
+	return (binn_ret);
 }
 
 /**
@@ -97,7 +96,7 @@ void f_cmd(inf_t *inf)
 	if (!k)
 		return;
 
-	path = find_path(inf, get_env(inf, "PATH="), inf->argv[0]);
+	path = f_path(inf, get_env(inf, "PATH="), inf->argv[0]);
 	if (path)
 	{
 		inf->path = path;
@@ -111,7 +110,7 @@ void f_cmd(inf_t *inf)
 		else if (*(inf->arg) != '\n')
 		{
 			inf->status = 127;
-			print_err(inf, "not found\n");
+			p_err(inf, "not found\n");
 		}
 	}
 }
@@ -150,7 +149,7 @@ void fork_cmd(inf_t *inf)
 		{
 			inf->status = WEXITSTATUS(inf->status);
 			if (inf->status == 126)
-				print_err(inf, "Permission denied\n");
+				p_err(inf, "Permission denied\n");
 		}
 	}
 }

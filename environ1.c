@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * get_envir - returns the array copy of environ.
  * @inf: Structure containing arguments.

@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * interactive_md - returns true when shell is in an interactive mode.
  * @inf: struct address.

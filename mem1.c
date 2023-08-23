@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * _mem_set - fills memory with a const byte.
  * @s: pointer to memory area.

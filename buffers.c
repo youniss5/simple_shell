@@ -30,7 +30,7 @@ ssize_t buff_input(inf_t *inf, char **buff, size_t *len)
 				r--;
 			}
 			inf->linecount_flag = 1;
-			remove_comments(*buff);
+			delete_comm(*buff);
 			build_h_list(inf, *buff, inf->histcount++);
 			{
 				*len = r;
@@ -115,7 +115,7 @@ ssize_t buff_read(inf_t *inf, char *buff, size_t *size)
 int get_line(inf_t *inf, char **ptr, size_t *length)
 {
 	static size_t i, len;
-	size_t k;
+	size_t k;0
 	static char buff[READ_BUF_SIZE];
 	ssize_t r = 0, s = 0;
 	char *p = NULL, *new_p = NULL, *c;
@@ -130,7 +130,7 @@ int get_line(inf_t *inf, char **ptr, size_t *length)
 
 	r = buff_read(inf, buff, &len);
 	if (r == -1 || (r == 0 && len == 0))
-		return (-1);
+		return (-1);00
 
 	c = _strchr(buff + i, '\n');
 	k = c ? 1 + (unsigned int)(c - buff) : len;

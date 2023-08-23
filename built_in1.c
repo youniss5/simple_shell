@@ -15,9 +15,9 @@ int _exitshell(inf_t *inf)
 		if (exitcheck == -1)
 		{
 			inf->status = 2;
-			print_err(inf, "Illegal number: ");
-			_eputs(inf->argv[1]);
-			_eputchar('\n');
+			p_err(inf, "Illegal number: ");
+			e_puts(inf->argv[1]);
+			e_putchar('\n');
 			return (1);
 		}
 		inf->err_num = err_atoi(inf->argv[1]);
@@ -65,8 +65,8 @@ int _cdir(inf_t *inf)
 		chdir_ret = chdir(inf->argv[1]);
 	if (chdir_ret == -1)
 	{
-		print_err(inf, "can't cd to ");
-		_eputs(inf->argv[1]), _eputchar('\n');
+		p_err(inf, "can't cd to ");
+		e_puts(inf->argv[1]), e_putchar('\n');
 	}
 	else
 	{

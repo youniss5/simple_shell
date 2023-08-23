@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * clear_inf - clears inf_t struct.
  * @inf: address of struct.
@@ -65,7 +64,7 @@ void _ffree_inf(inf_t *inf, int x)
 			free_list(&(inf->alias));
 		_ffree(inf->environ);
 			inf->environ = NULL;
-		bfree((void **)inf->cmd_buf);
+		mem_free((void **)inf->cmd_buf);
 		if (inf->read_fd > 2)
 			close(inf->read_fd);
 		put_char(BUF_FLUSH);

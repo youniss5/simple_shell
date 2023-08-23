@@ -100,18 +100,18 @@ typedef struct data
 typedef struct builtin
 {
 	char *type;
-	int (*func)(info_t *);
+	int (*func)(inf_t *);
 } builtin_table;
 
 
-int hsh(info_t *, char **);
-int find_builtin(info_t *);
-void find_cmd(info_t *);
-void fork_cmd(info_t *);
+int cmd_loop(inf_t *, char **);
+int f_bin(inf_t *);
+void find_cmd(inf_t *);
+void fork_cmd(inf_t *);
 
-int is_cmd(info_t *, char *);
-char *dup_chars(char *, int, int);
-char *find_path(info_t *, char *, char *);
+int is_cmd(inf_t *, char *);
+char *dup_char(char *, int, int);
+char *f_path(inf_t *, char *, char *);
 
 int loophsh(char **);
 
@@ -141,7 +141,7 @@ char *_strdup(const char *);
 char **splitter(char *, char *);
 char **splitter2(char *, char);
 
-char *_memset(char *, char, unsigned int);
+char *_mem_set(char *, char, unsigned int);
 void _ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
 
@@ -154,10 +154,10 @@ int _atoi(char *);
 int delim_chk(char, char *);
 
 int err_atoi(char *);
-void print_err(info_t *, char *);
+void p_err(info_t *, char *);
 int print_d(int, int);
-char *convert_number(long int, int, int);
-void remove_comments(char *);
+char *transfer_number(long int, int, int);
+void delete_comm(char *);
 
 int _exitshell(inf_t *);
 int _mycdir(inf_t *);

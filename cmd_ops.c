@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * is_cmd - check if a file is an executable file.
  * @inf: the inf struct.

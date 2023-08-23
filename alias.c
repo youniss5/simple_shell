@@ -1,5 +1,4 @@
 #include "shell.h"
-
 /**
  * alias_exchange - exchanges an alias in the token.
  * @inf: the struct parameter.
@@ -49,13 +48,13 @@ int vars_exchange(inf_t *inf)
 		if (!_strcmp(inf->argv[x], "$?"))
 		{
 			string_replace(&(inf->argv[x]),
-				_strdup(convert_number(inf->status, 10, 0)));
+				_strdup(transfer_numb(inf->status, 10, 0)));
 			continue;
 		}
 		if (!_strcmp(inf->argv[x], "$$"))
 		{
 			string_replace(&(inf->argv[x]),
-				_strdup(convert_number(getpid(), 10, 0)));
+				_strdup(transfer_numb(getpid(), 10, 0)));
 			continue;
 		}
 		node = node_starts_with(inf->env, &inf->argv[x][1], '=');
