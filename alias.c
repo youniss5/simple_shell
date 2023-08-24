@@ -12,7 +12,7 @@ int alias_exchange(inf_t *inf)
 
 	for (x = 0; x < 10; x++)
 	{
-		node = node_starts_with(inf->alias, inf->argv[0], '=');
+		node = n_goes_by(inf->alias, inf->argv[0], '=');
 		if (!node)
 			return (0);
 		free(inf->argv[0]);
@@ -57,7 +57,7 @@ int vars_exchange(inf_t *inf)
 				_strdup(transfer_numb(getpid(), 10, 0)));
 			continue;
 		}
-		node = node_starts_with(inf->env, &inf->argv[x][1], '=');
+		node = n_goes_by(inf->env, &inf->argv[x][1], '=');
 		if (node)
 		{
 			string_replace(&(inf->argv[x]),

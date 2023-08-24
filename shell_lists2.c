@@ -43,13 +43,13 @@ size_t print_list(const list_t *h)
 }
 
 /**
- * node_starts_with - gets node its str starts with prefix.
+ * n_goes_by - gets node its str starts with prefix.
  * @node: pointer to list head.
  * @prefix: str to match.
  * @c: next character after prefix to match.
  * Return: null or match node.
  */
-list_t *node_starts_with(list_t *node, char *prefix, char c)
+list_t *n_goes_by(list_t *node, char *prefix, char c)
 {
 	char *p = NULL;
 

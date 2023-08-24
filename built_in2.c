@@ -19,18 +19,18 @@ int _history(inf_t *inf)
  */
 int unset_alias(inf_t *inf, char *str)
 {
-	char *p, c;
-	int ret;
+	char *p, x;
+	int r;
 
 	p = _strchr(str, '=');
 	if (!p)
 		return (1);
-	c = *p;
+	x = *p;
 	*p = 0;
-	ret = delete_node_at_index(&(inf->alias),
-		get_node_index(inf->alias, node_starts_with(inf->alias, str, -1)));
-	*p = c;
-	return (ret);
+	r = delete_node_at_index(&(inf->alias),
+		get_node_index(inf->alias, n_goes_by(inf->alias, str, -1)));
+	*p = x;
+	return (r);
 }
 
 /**
@@ -82,8 +82,8 @@ int print_alias(list_t *node)
  */
 int _alias(inf_t *inf)
 {
-	int i = 0;
-	char *p = NULL;
+	int x = 0;
+	char *pointer = NULL;
 	list_t *node = NULL;
 
 	if (inf->argc == 1)
@@ -96,13 +96,13 @@ int _alias(inf_t *inf)
 		}
 		return (0);
 	}
-	for (i = 1; inf->argv[i]; i++)
+	for (x = 1; inf->argv[x]; x++)
 	{
-		p = _strchr(inf->argv[i], '=');
-		if (p)
-			set_alias(inf, inf->argv[i]);
+		pointer = _strchr(inf->argv[x], '=');
+		if (pointer)
+			set_alias(inf, inf->argv[x]);
 		else
-			print_alias(node_starts_with(inf->alias, inf->argv[i], '='));
+			print_alias(n_goes_by(inf->alias, inf->argv[x], '='));
 	}
 
 	return (0);
