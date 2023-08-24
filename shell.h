@@ -102,19 +102,16 @@ typedef struct builtin
 	char *type;
 	int (*func)(inf_t *);
 } builtin_table;
-
+/* sh_ops.c */
 int is_cmd(inf_t *, char *);
-
 int cmd_loop(inf_t *, char **);
 int f_bin(inf_t *);
 void f_cmd(inf_t *);
 void fork_cmd(inf_t *);
-
+/* cmd_ops */
 char *dup_char(char *, int, int);
 char *f_path(inf_t *, char *, char *);
-
-int loophsh(char **);
-
+/* errors1.c */
 void e_puts(char *);
 int e_putchar(char);
 int put_fd(char c, int fd);
@@ -140,7 +137,7 @@ char *_strdup(const char *);
 /* token.c */
 char **splitter(char *, char *);
 char **splitter2(char *, char);
-
+/* mem1.c */
 char *_mem_set(char *, char, unsigned int);
 void _ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
@@ -152,17 +149,17 @@ int interactive_md(inf_t *);
 int _isalpha(int);
 int _atoi(char *);
 int delim_chk(char, char *);
-
+/* error2.c */
 int err_atoi(char *);
 void p_err(inf_t *, char *);
 int print_d(int, int);
 char *transfer_numb(long int, int, int);
 void delete_comm(char *);
-
+/* built_in.c*/
 int _exitshell(inf_t *);
 int _cdir(inf_t *);
 int _pdir(inf_t *);
-
+/* built_in2.c */
 int _history(inf_t *);
 int _alias(inf_t *);
 
@@ -189,19 +186,19 @@ int env_list(inf_t *);
 char **get_envir(inf_t *);
 int _unset_envir(inf_t *, char *);
 int _set_envir(inf_t *, char *, char *);
-
+/* history */
 char *get_h_file(inf_t *inf);
 int write_h(inf_t *inf);
 int read_h(inf_t *inf);
 int build_h_list(inf_t *inf, char *buf, int linecount);
 int renumber_h(inf_t *inf);
-
+/* lists */
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
 size_t print_list_str(const list_t *);
 int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
-
+/* lists */
 size_t list_len(const list_t *);
 char **list_to_strings(list_t *);
 size_t print_list(const list_t *);
